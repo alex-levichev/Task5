@@ -1,4 +1,5 @@
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.DragAndDropOptions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -13,20 +14,23 @@ public class SecondTest {
     static void beforeAll() {
         Configuration.browserSize = "1920x1080";
         Configuration.pageLoadStrategy = "eager";
-        Configuration.holdBrowserOpen = true;
     }
     @Test
 
-    void simpleCheckTest(){
+    void simpleCheckTestForGitHub(){
         open("https://github.com");
         $(byText("Solutions")).hover();
         $(byText("Enterprise")).click();
 $("#hero-section-brand-heading").shouldHave(text("The AI-powered developer platform"));
+$(".enterprise-section-rounded").shouldHave(text("Deliver secure software fast, with enterprise-ready CI/CD using GitHub Actions."));
 }
 
-@Test
-    void secondTest(){
-    open("https://github.com");
+    @Test
+    void dragAndDropTest(){
+    open("https://the-internet.herokuapp.com/drag_and_drop");
+    $("#column-a").dragAndDrop(DragAndDropOptions.to("#column-b"));
+    $("#column-a").shouldHave(text("B"));
+    $("#column-b").shouldHave(text("A"));
 
 }
 }
